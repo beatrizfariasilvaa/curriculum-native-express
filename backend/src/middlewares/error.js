@@ -37,6 +37,14 @@ const errorMiddleware = (err, req, res, next) => {
     });
   }
 
+   if (err.name === "SequelizeForeignKeyConstraintError") {
+    return res.status(400).send({
+      status: "fail",
+      message: "Referência inválida: o registro relacionado (ex.: pessoaId) não existe.",
+      ...(isDev && { stack: err.stack }),
+    });
+  }
+
   if (err.name === "SequelizeDatabaseError" && err.original?.code === "22P02") {
     return res.status(400).send({
       status: "fail",

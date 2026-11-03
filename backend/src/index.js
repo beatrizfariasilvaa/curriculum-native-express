@@ -1,6 +1,6 @@
 import "dotenv/config";
-import { sequelize } from "./models/index.js";
 import express from "express";
+import { sequelize } from "./models/index.js";
 import {
   corsMiddleware,
   logMiddleware,
@@ -9,24 +9,32 @@ import {
 } from "./middlewares/index.js";
 import * as routes from "./routes/index.js";
 
-const app=express();
+const app = express();
 
 app.set("trust proxy", true);
 
+// middlewares
 app.use(corsMiddleware);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(logMiddleware);
 
+// rotas
 app.get("/", (req, res) => {
-    return res.send("API de currículos no ar!");
+  return res.send("API de currículos no ar!");
 });
 app.use("/pessoas", routes.pessoa);
+app.use("/academicas", routes.academica);
+app.use("/profissionais", routes.profissional);
+app.use("/projetos", routes.projeto);
+app.use("/tecnologias", routes.tecnologia);
 
 app.use(notFoundMiddleware);
+
 app.use(errorMiddleware);
 
 const port = process.env.PORT || 3000;
+
 const eraseDatabaseOnSync = process.env.ERASE_DATABASE_ON_SYNC === "true";
 const syncDatabase =
   process.env.SYNC_DATABASE === "true" || eraseDatabaseOnSync;
