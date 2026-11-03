@@ -7,19 +7,18 @@ import {
   notFoundMiddleware,
   errorMiddleware,
 } from "./middlewares/index.js";
+import seed from "./seed.js";
 import * as routes from "./routes/index.js";
 
 const app = express();
 
 app.set("trust proxy", true);
 
-// middlewares
 app.use(corsMiddleware);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(logMiddleware);
 
-// rotas
 app.get("/", (req, res) => {
   return res.send("API de currículos no ar!");
 });
@@ -45,6 +44,9 @@ const startServer = () => {
 
 if (syncDatabase) {
   sequelize.sync({ force: eraseDatabaseOnSync }).then(async () => {
+    if (eraseDatabaseOnSync) {
+      await seed();
+    }
     startServer();
   });
 } else {
