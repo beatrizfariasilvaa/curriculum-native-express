@@ -40,10 +40,24 @@ const deleteProjeto = async (req, res) => {
   return res.status(204).send();
 };
 
+const addTecnologia = async (req, res) => {
+  const { projetoId, tecnologiaId } = req.params;
+  const projeto = await projetoService.addTecnologia(projetoId, tecnologiaId);
+  return res.status(201).send(projeto);
+};
+
+const removeTecnologia = async (req, res) => {
+  const { projetoId, tecnologiaId } = req.params;
+  await projetoService.removeTecnologia(projetoId, tecnologiaId);
+  return res.status(204).send();
+};
+
 export default {
   getProjetos,
   getProjeto,
   createProjeto,
   updateProjeto,
   deleteProjeto,
+  addTecnologia,
+  removeTecnologia
 };

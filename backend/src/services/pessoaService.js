@@ -25,10 +25,29 @@ const deletePessoa = async (id) => {
   return count > 0;
 };
 
+const getCurriculo = async (id) => {
+  return await models.Pessoa.findByPk(id, {
+    include: [
+      models.ExperienciaAcademica,
+      models.ExperienciaProfissional,
+      {
+        model: models.Projeto,
+        include: [{ model: models.Tecnologia, through: { attributes: [] } }],
+      },
+    ],
+    order: [
+      [models.ExperienciaAcademica, "inicio", "DESC"],
+      [models.ExperienciaProfissional, "inicio", "DESC"],
+      [models.Projeto, "id", "ASC"],
+    ],
+  });
+};
+
 export default {
   getAllPessoas,
   getPessoaById,
   createPessoa,
   updatePessoa,
   deletePessoa,
+  getCurriculo
 };

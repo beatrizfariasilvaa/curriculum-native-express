@@ -22,6 +22,15 @@ const getPessoas = async (req, res) => {
   return res.status(200).send(pessoas);
 };
 
+const getCurriculo = async (req, res) => {
+  const curriculo = await pessoaService.getCurriculo(req.params.pessoaId);
+  if (!curriculo) {
+    throw new AppError("Pessoa não encontrada.", 404);
+  }
+  return res.status(200).send(curriculo);
+};
+
+
 
 const createPessoa = async (req, res) => {
   const pessoa = await pessoaService.createPessoa(lerCampos(req.body));
@@ -51,4 +60,5 @@ export default {
   createPessoa,
   updatePessoa,
   deletePessoa,
+  getCurriculo
 };

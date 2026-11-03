@@ -8,5 +8,7 @@ router.post("/", projetoController.createProjeto);
 router.get("/:projetoId", projetoController.getProjeto);
 router.put("/:projetoId", projetoController.updateProjeto);
 router.delete("/:projetoId", projetoController.deleteProjeto);
+router.post("/:projetoId/tecnologias/:tecnologiaId", projetoController.addTecnologia);
+router.delete("/:projetoId/tecnologias/:tecnologiaId", projetoController.removeTecnologia);
 
 export default router;

@@ -7,5 +7,6 @@ router.get("/:pessoaId", pessoaController.getPessoa);
 router.post("/", pessoaController.createPessoa);
 router.put("/:pessoaId", pessoaController.updatePessoa);
 router.delete("/:pessoaId", pessoaController.deletePessoa);
+router.get("/:pessoaId/curriculo", pessoaController.getCurriculo);
 
 export default router;
