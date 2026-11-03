@@ -1,6 +1,11 @@
 import { pessoaService } from "../services/index.js";
 import { AppError } from "../utils/index.js";
 
+const lerCampos = (body) => {
+  const { nome, titulo, resumo, email, cidade, github, linkedin, fotoUrl } = body || {};
+  return { nome, titulo, resumo, email, cidade, github, linkedin, fotoUrl };
+};
+
 const getPessoa = async (req, res) => {
   const pessoa = await pessoaService.getPessoaById(req.params.pessoaId);
   if (!pessoa) {
