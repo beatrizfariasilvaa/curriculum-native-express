@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
   iniciais: { fontSize: 38, fontWeight: "800", color: cores.tinta },
   nome: { fontSize: 26, fontWeight: "800", color: "#FFFFFF", textAlign: "center" },
   titulo: { fontSize: 16, color: cores.destaque, fontWeight: "600", textAlign: "center" },
-  cidade: { fontSize: 14, color: "#C9D1E3", marginTop: 4 },
+  cidade: { fontSize: 14, color: "rgba(255,255,255,0.7)", marginTop: 4 },
   links: {
     flexDirection: "row",
     justifyContent: "center",
