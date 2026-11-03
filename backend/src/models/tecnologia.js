@@ -19,6 +19,14 @@ const getTecnologiaModel = (sequelize, { DataTypes }) => {
       name: { singular: "tecnologia", plural: "tecnologias" },
     },
   );
+  
+  Tecnologia.associate = (models) => {
+    Tecnologia.belongsToMany(models.Projeto, {
+      through: "projeto_tecnologias",
+      foreignKey: "tecnologiaId",
+      otherKey: "projetoId",
+    });
+  };
 
   return Tecnologia;
 };

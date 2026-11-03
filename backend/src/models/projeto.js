@@ -23,6 +23,15 @@ const getProjetoModel = (sequelize, { DataTypes }) => {
     },
   });
 
+  Projeto.associate = (models) => {
+    Projeto.belongsTo(models.Pessoa, { foreignKey: "pessoaId" });
+    Projeto.belongsToMany(models.Tecnologia, {
+      through: "projeto_tecnologias",
+      foreignKey: "projetoId",
+      otherKey: "tecnologiaId",
+    });
+  };
+
   return Projeto;
 };
 

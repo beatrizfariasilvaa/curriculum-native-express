@@ -38,7 +38,10 @@ const getExperienciaAcademicaModel = (sequelize, { DataTypes }) => {
       tableName: "experiencias_academicas",
       name: { singular: "experienciaAcademica", plural: "experienciasAcademicas" },
     },
-  ); return ExperienciaAcademica;
+  ); 
+  ExperienciaAcademica.associate = (models) => {
+    ExperienciaAcademica.belongsTo(models.Pessoa, { foreignKey: "pessoaId" });
+  }; return ExperienciaAcademica;
 };
 
 export default getExperienciaAcademicaModel;
